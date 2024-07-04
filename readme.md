@@ -9,7 +9,7 @@ User Login :
 - password : 12345678 
 
 1. Akun Operator Barang
-- username :operatorbarang
+- username : operatorbarang
 - password : 12345678 
 
 1. Akun Operator Mahasiswa 
