@@ -1,18 +1,8 @@
 <?php include 'layout/header.php'; 
 
-    $title = 'Daftar Barang';
+    $title = 'Daftar Pegawai';
 
-   if (isset($_POST['filter'])) {
-      $tgl_awal = strip_tags($_POST['tgl_awal'] . " 00:00:00");
-      $tgl_akhir = strip_tags($_POST['tgl_akhir'] . " 23:59:59");
-
-      $data_barang = select("SELECT * FROM barang WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY id_barang DESC");
-   }else {
-    $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
-
-   }
-
-
+    $data_pegawai = select("SELECT * FROM pegawai ORDER BY id_pegawai DESC");
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -108,45 +98,24 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tabel Data Barang</h3>
+                <h3 class="card-title">Tabel Data Pegawai</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <a href="tambah-barang.php" class="btn btn-primary btn-sm mb-2"><i class="fas fa-plus"></i> Tambah Barang</a>
-
-                <button type="button" class="btn btn-success btn-sm mb-2" data-toggle="modal" data-target="#modalFilter">
-                      <i class="fas fa-seacrh">Filter Data</i>
-                </button>
-                <table id="example2" class="table table-bordered table-hover">
+                
+                <table class="table table-bordered table-hover">
                 <thead>
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Jumlah</th>
-                <th>Harga</th>
-                <th>Barcode</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
+                <th>Jabatan</th>
+                <th>Email</th>
+                <th>Telepon</th>
+                <th>Alamat</th>
             </tr>
         </thead>
-        <tbody>
-          <?php $no = 1; ?>
-          <?php foreach ($data_barang as $barang) : ?>  
-          <tr>
-            <td><?= $no++; ?></td>
-            <td><?= $barang ['nama'];?></td>
-            <td><?= $barang ['jumlah'];?></td>
-            <td>Rp. <?= number_format($barang ['harga'],0,',','.')?></td>
-            <td class="text-center">
-                    <img alt="barcode" src="barcode.php?codetype=Code128&size=15&text=<?= $barang['barcode']; ?>& print=true"/>
-            </td>
-            <td><?= date("d/m/y | H:i:s", strtotime($barang['tanggal']));?></td>
-            <td width="15%" class="text-center">
-                <a href="ubah-barang.php?id_barang=<?=$barang['id_barang']; ?>" class="btn btn-success" >Edit</a>
-                <a href="hapus-barang.php?id_barang=<?=$barang['id_barang']; ?>" class="btn btn-danger" >Hapus</a>
-            </td>
-            </tr>
-            <?php endforeach; ?>
+        <tbody id="live_data">
+
         </tbody>
                 </table>
               </div>
@@ -161,38 +130,22 @@
     </section>
     <!-- /.content -->
   </div>
+  <script>
+    $('document').ready(function(){
+        setInterval(function(){
+            getPegawai()
+        }, 200)
+    });
+
+    function getPegawai() {
+        $.ajax({
+            url : "realtime-pegawai.php",
+            type : "GET",
+            success: function(response) {
+                $('#live_data').html(response)
+            }
+        });
+    }
+  </script>
   <!-- /.content-wrapper -->
-
-  <div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-success">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-seacrh"></i> Filter Data</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-              <form action="" method="post">
-                <div class="from-group">
-                  <label for="tgl_awal">Tanggal Awal</label>
-                  <input type="date" name="tgl_awal" id="tgl_awal" class="form-control">
-                </div>
-
-                <div class="from-group">
-                  <label for="tgl_akhir">Tanggal Akhir</label>
-                  <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control">
-                </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="submit" name="filter" class="btn btn-primary">Submit</button>
-      </div>
-      
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-
   <?php include 'layout/footer.php'; ?>

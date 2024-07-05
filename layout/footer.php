@@ -14,8 +14,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="assets-template/plugins/jquery/jquery.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="assets-template/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -70,6 +69,28 @@
 <script>
   $(function () {
     $('#example2').DataTable();
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('#serverside').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : {
+        "url": 'mahasiswa-serverside.php?action=table_data',
+        "dataType" : "json",
+        "type" : "POST"
+      },
+      columns : [
+        {"data":"no"},
+        {"data":"nama"},
+        {"data":"prodi"},
+        {"data":"jk"},
+        {"data":"telepon"},
+        {"data":"aksi"},
+      ]
+    });
   });
 </script>
 </body>

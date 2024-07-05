@@ -1,6 +1,8 @@
 <?php
+session_start();
 
 include 'config/app.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +36,8 @@ include 'config/app.php';
   <link rel="stylesheet" href="assets-template/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="assets-template/plugins/summernote/summernote-bs4.min.css">
+  <!-- jQuery -->
+<script src="assets-template/plugins/jquery/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -219,35 +223,58 @@ include 'config/app.php';
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-header">Daftar Menu</li>
+
+               
                <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="index.php" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Data Barang
                         </p>
                     </a>
                </li>
+               
 
+               
                <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="mahasiswa.php" class="nav-link">
                         <i class="nav-icon fas fa-user-graduate"></i>
                         <p>
                             Data Mahasiswa
                         </p>
                     </a>
                </li>
+              
 
                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                    <a href="pegawai.php" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Data Mahasiswa
+                            Data Pegawai (RealTime)
                         </p>
                     </a>
                </li>
 
                <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="email.php" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Kirim Email (PHPMailer)
+                        </p>
+                    </a>
+               </li>
+
+               <li class="nav-item">
+                    <a href="crud-modal.php" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Data Akun
+                        </p>
+                    </a>
+               </li>
+
+               <li class="nav-item">
+                    <a href="logout.php" class="nav-link" onclick="return confirm('Yakin Anda Ingin Keluar.?');">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
                             Logout
