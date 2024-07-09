@@ -55,10 +55,10 @@ include 'config/app.php';
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="home.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="https://www.instagram.com/panggilajabayyy?igsh=MTE0MnR5YXUzMTRjdg==" class="nav-link">Contact</a>
       </li>
     </ul>
 
@@ -198,10 +198,10 @@ include 'config/app.php';
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="assets-template/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="assets-template/dist/img/sad.jpeg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">Bayu Usman Radhitya</a>
         </div>
       </div>
 
@@ -224,7 +224,16 @@ include 'config/app.php';
                with font-awesome or any other icon font library -->
                <li class="nav-header">Daftar Menu</li>
 
-               
+               <li class="nav-item">
+                    <a href="home.php" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+               </li>
+
+               <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 2) : ?>
                <li class="nav-item">
                     <a href="index.php" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
@@ -233,9 +242,9 @@ include 'config/app.php';
                         </p>
                     </a>
                </li>
-               
+               <?php endif; ?>
 
-               
+               <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 3) : ?>
                <li class="nav-item">
                     <a href="mahasiswa.php" class="nav-link">
                         <i class="nav-icon fas fa-user-graduate"></i>
@@ -244,8 +253,9 @@ include 'config/app.php';
                         </p>
                     </a>
                </li>
+               <?php endif; ?>
               
-
+               <?php if ($_SESSION['level'] == 1 ) : ?>
                <li class="nav-item">
                     <a href="pegawai.php" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -254,6 +264,7 @@ include 'config/app.php';
                         </p>
                     </a>
                </li>
+               <?php endif; ?>
 
                <li class="nav-item">
                     <a href="email.php" class="nav-link">

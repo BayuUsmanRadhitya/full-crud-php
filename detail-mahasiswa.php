@@ -1,4 +1,12 @@
 <?php 
+if (!isset($_SESSION["login"])) {
+    echo"<script>
+            alert('Login Dulu!!');
+            document.location.href='login.php';
+        </script>";
+    exit;
+  }
+  
 
 include 'layout/header.php'; 
 
@@ -10,7 +18,8 @@ $data_mahasiswa = mysqli_query($db, "SELECT * FROM mahasiswa WHERE id_mahasiswa 
 $mahasiswa = mysqli_fetch_array($data_mahasiswa);
 ?>
 
-<div class="container mt-5">
+<div class="content-wrapper">
+<div class="container ">
     <h1> Data <?= $mahasiswa['nama']; ?></h1>
     <hr>
     <table class="table table-bordered table-striped mt-3">
@@ -48,6 +57,7 @@ $mahasiswa = mysqli_fetch_array($data_mahasiswa);
     </table>
 
     <a href="mahasiswa.php" class="btn btn-secondary btn-sm" style="float: right;">Kembali</a>
+    </div>
     </div>
 
 <?php include 'layout/footer.php'; ?>

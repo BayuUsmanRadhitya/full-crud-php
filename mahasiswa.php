@@ -1,5 +1,14 @@
 <?php include 'layout/header.php'; 
 
+if (!isset($_SESSION["login"])) {
+  echo"<script>
+          alert('Login Dulu!!');
+          document.location.href='login.php';
+      </script>";
+  exit;
+}
+
+
     $title = 'Daftar Mahasiswa';
      
     $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
@@ -11,12 +20,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0"><i class="nav-icon fas fa-user-graduate"></i> Data Mahasiswa</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+              <li class="breadcrumb-item active">Mahasiswa</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -24,75 +33,6 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Bounce Rate</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-        <!-- /.row -->
-        <!-- Main row -->
-            <!-- Main content -->
     <section class="content">
         <div class="row">
           <div class="col-12">
@@ -102,9 +42,11 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <a href="tambah-mahasiswa.php" class="btn btn-primary mb-1"> Tambah Mahasiswa</a>
-                <a href="donwload-excel-mahasiswa.php" class="btn btn-success mb-1">Donwload Excel</a>
-                <a href="donwload-pdf-mahasiswa.php" class="btn btn-danger mb-1">Donwload Pdf</a>
+                <a href="tambah-mahasiswa.php" class="btn btn-primary mb-1"><i class="fas fa-plus"></i> Tambah Mahasiswa</a>
+                <a href="donwload-excel-mahasiswa.php" class="btn btn-success mb-1">Download Excel</a>
+                <a href="donwload-pdf-mahasiswa.php" class="btn btn-danger mb-1">Download Pdf</a>
+
+                <br><br>
 
                 <table id="serverside" class="table table-bordered table-hover">
                 <thead>

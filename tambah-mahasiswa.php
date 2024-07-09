@@ -5,6 +5,15 @@ $title = 'Tambah Mahasiswa';
 
 include 'layout/header.php'; 
 
+if (!isset($_SESSION["login"])) {
+    echo"<script>
+            alert('Login Dulu!!');
+            document.location.href='login.php';
+        </script>";
+    exit;
+  }
+  
+
 if(isset($_POST['tambah'])){
     if (create_mahasiswa($_POST) > 0 ) {
         echo"<script>
@@ -20,7 +29,8 @@ if(isset($_POST['tambah'])){
 
 }
 ?>
-<div class="container mt-5">
+<div class="content-wrapper">
+<div class="container ">
     <h1>Tambah Data Mahasiswa </h1>
 
     <hr>
@@ -58,7 +68,7 @@ if(isset($_POST['tambah'])){
 
         <div class="mb-3">
             <label for="Alamat" class="form-label">Alamat</label>
-            <textarea name="alamat" id="alamat"></textarea>
+            <textarea name="alamat" id="alamat" class="form-control"></textarea>
         </div>
 
         <div class="mb-3">
@@ -75,7 +85,8 @@ if(isset($_POST['tambah'])){
         <input type="submit" class="btn btn-primary" name="tambah" style="float: right;">
     </form>
 
-</div>
+    </div>
+    </div>
 <script>
     function previewImg() {
         const foto = document.querySelector('#foto');

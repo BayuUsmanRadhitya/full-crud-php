@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 10:29 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jul 05, 2024 at 11:29 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `akun` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `level` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `akun`
@@ -56,25 +56,21 @@ CREATE TABLE `barang` (
   `nama` varchar(50) NOT NULL,
   `jumlah` int(50) NOT NULL,
   `harga` int(50) NOT NULL,
+  `barcode` varchar(15) NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES
-(1, 'Pulpen', 4, 2000, '2024-07-02 01:02:18'),
-(2, 'Pensil', 3, 1000, '2024-07-01 06:50:01'),
-(3, 'Bayu', 56, 1000, '2024-07-02 01:02:38'),
-(4, 'Buku ', 2, 2000, '2024-07-01 08:12:09'),
-(5, 'HP', 10, 10000000, '2024-07-01 08:12:37'),
-(6, 'HP', 10, 10000000, '2024-07-01 08:13:01'),
-(7, 'Papan Dada', 1, 5000, '2024-07-01 08:13:24'),
-(8, 'Papan Dada', 1, 5000, '2024-07-01 08:14:20'),
-(9, 'Papan Dada', 1, 5000, '2024-07-01 08:14:25'),
-(10, 'Papan Dada', 1, 5000, '2024-07-01 08:15:08'),
-(12, 'Monitor', 1, 50000, '2024-07-02 03:04:49');
+INSERT INTO `barang` (`id_barang`, `nama`, `jumlah`, `harga`, `barcode`, `tanggal`) VALUES
+(8, 'Papan Dada', 1, 5000, '', '2024-07-01 08:14:20'),
+(9, 'Papan Dada', 1, 5000, '', '2024-07-01 08:14:25'),
+(10, 'Papan Dada', 1, 5000, '', '2024-07-01 08:15:08'),
+(12, 'Monitor', 1, 50000, '', '2024-07-02 03:04:49'),
+(13, 'Laptop', 1, 10000, '', '2024-07-04 01:13:50'),
+(14, 'Laptop', 1, 10000, '', '2024-07-04 01:15:11');
 
 -- --------------------------------------------------------
 
@@ -88,16 +84,41 @@ CREATE TABLE `mahasiswa` (
   `prodi` varchar(50) NOT NULL,
   `jk` varchar(10) NOT NULL,
   `telepon` varchar(30) NOT NULL,
+  `alamat` text NOT NULL,
   `email` varchar(30) NOT NULL,
   `foto` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mahasiswa`
 --
 
-INSERT INTO `mahasiswa` (`id_mahasiswa`, `nama`, `prodi`, `jk`, `telepon`, `email`, `foto`) VALUES
-(1, 'Bayu Usman Radhitya', 'Teknik Informatika ', 'Laki-Laki', '081320131178', 'usmanradhityab@gmail.com', 'foto.jpg');
+INSERT INTO `mahasiswa` (`id_mahasiswa`, `nama`, `prodi`, `jk`, `telepon`, `alamat`, `email`, `foto`) VALUES
+(1, 'Bayu Usman Radhitya', 'Teknik Informatika', 'Laki-Laki', '081320131178', 'Jalan Jalan\r\n', 'usmanradhityab@gmail.com', '6685fb01ab80a.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pegawai`
+--
+
+CREATE TABLE `pegawai` (
+  `id_pegawai` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `telepon` varchar(100) NOT NULL,
+  `alamat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pegawai`
+--
+
+INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jabatan`, `email`, `telepon`, `alamat`) VALUES
+(1, 'Bayu Usman Radhitya ', 'Direktur', 'usmanradhityab@gmail.com', '081320131178', 'Kp. Babakan Kidul RT.07 RW.04'),
+(2, 'Udin', 'Wakil Direktur', 'usmanradhityab@gmail.com', '081320131178', 'Kp. Babakan Kidul RT.07 RW.04'),
+(3, 'Dadan', 'Wakil Direktur 2', 'usmanradhityab@gmail.com', '081320131178', 'Jalan Jalan');
 
 --
 -- Indexes for dumped tables
@@ -122,6 +143,12 @@ ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`id_mahasiswa`);
 
 --
+-- Indexes for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD PRIMARY KEY (`id_pegawai`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -129,19 +156,25 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   MODIFY `id_mahasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

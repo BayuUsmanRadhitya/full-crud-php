@@ -4,6 +4,15 @@ include 'layout/header.php';
 
 $title = 'Ubah Barang';
 
+if (!isset($_SESSION["login"])) {
+    echo"<script>
+            alert('Login Dulu!!');
+            document.location.href='login.php';
+        </script>";
+    exit;
+  }
+  
+
 $id_barang = (int)$_GET['id_barang'];
 
         $barang = mysqli_query($db, "SELECT * FROM barang WHERE id_barang=$id_barang");
@@ -32,8 +41,8 @@ $id_barang = (int)$_GET['id_barang'];
         }
  ?>
 
-
-<div class="container mt-5">
+<div class="content-wrapper">
+<div class="container">
     <h1>Ubah Barang</h1>
 
     <hr>
@@ -56,4 +65,6 @@ $id_barang = (int)$_GET['id_barang'];
     </form>
 
 </div>
+</div>
+
 <?php include 'layout/footer.php'; ?>

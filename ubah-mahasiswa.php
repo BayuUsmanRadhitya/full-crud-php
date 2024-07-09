@@ -4,6 +4,15 @@ $title = 'Ubah Mahasiswa';
 
 include 'layout/header.php'; 
 
+if (!isset($_SESSION["login"])) {
+    echo"<script>
+            alert('Login Dulu!!');
+            document.location.href='login.php';
+        </script>";
+    exit;
+  }
+  
+
 $id_mahasiswa = (int)$_GET['id_mahasiswa'];
 
         $mahasiswa = mysqli_query($db, "SELECT * FROM mahasiswa WHERE id_mahasiswa=$id_mahasiswa");
@@ -35,7 +44,8 @@ $id_mahasiswa = (int)$_GET['id_mahasiswa'];
         
         }
 ?>
-<div class="container mt-5">
+<div class="content-wrapper">
+<div class="container ">
     <h1>Ubah Data Mahasiswa </h1>
 
     <hr>
@@ -71,7 +81,7 @@ $id_mahasiswa = (int)$_GET['id_mahasiswa'];
 
         <div class="mb-3">
             <label for="Alamat" class="form-label">Alamat</label>
-            <textarea name="alamat" id="alamat"><?=$alamat?></textarea>
+            <textarea name="alamat" id="alamat" class="form-control"><?=$alamat?></textarea>
         </div>
 
         <div class="mb-3">
@@ -85,12 +95,13 @@ $id_mahasiswa = (int)$_GET['id_mahasiswa'];
             <p>
                 <small>Gambar Sebelumnya</small>
             </p>
-            <img src="assets/img/<?=$foto?>" alt="foto" width="100px">
+            <img src="assets/img/<?=$foto?>" alt="foto" width="150px">
         </div>
         <input type="submit" class="btn btn-primary" name="ubah" style="float: right;">
     </form>
 
-</div>
+    </div>
+    </div>
 <script>
     function previewImg() {
         const foto = document.querySelector('#foto');

@@ -4,6 +4,15 @@ $title = 'Tambah Barang';
 
 include 'layout/header.php'; 
 
+if (!isset($_SESSION["login"])) {
+    echo"<script>
+            alert('Login Dulu!!');
+            document.location.href='login.php';
+        </script>";
+    exit;
+  }
+  
+
 if(isset($_POST['tambah'])){
     if (create_barang($_POST) > 0 ) {
         echo"<script>
@@ -21,7 +30,7 @@ if(isset($_POST['tambah'])){
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  <div class="container mt-5">
+  <div class="container ">
     <h1>Tambah Data Barang </h1>
 
     <hr>
@@ -44,4 +53,5 @@ if(isset($_POST['tambah'])){
 </div>
   </div>
   <!-- /.content-wrapper -->
+   
   <?php include 'layout/footer.php'; ?>
