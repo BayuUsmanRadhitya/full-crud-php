@@ -87,7 +87,7 @@ if (!isset($_SESSION["login"])) {
             <td><?= date("d/m/y | H:i:s", strtotime($barang['tanggal']));?></td>
             <td width="15%" class="text-center">
                 <a href="ubah-barang.php?id_barang=<?=$barang['id_barang']; ?>" class="btn btn-success" ><i class="fas fa-edit"></i>Edit</a>
-                <a href="hapus-barang.php?id_barang=<?=$barang['id_barang']; ?>" class="btn btn-danger" ><i class="fas fa-trash"></i>Hapus</a>
+                <a href="hapus-barang.php?id_barang=<?=$barang['id_barang']; ?>" class="btn btn-danger" onclick="return confirm('Yakin Anda Ingin Hapus.?');"><i class="fas fa-trash"></i>Hapus</a>
             </td>
             </tr>
             <?php endforeach; ?>
